@@ -1,42 +1,32 @@
-import { Component } from 'react';
-import { FiEdit3, FiTrash } from 'react-icons/fi';
+import { FiEdit3, FiTrash } from "react-icons/fi";
 
-import { Container } from './styles';
-import api from '../../services/api';
+import { Container } from "./styles";
 
-export const Food = () => {
-  constructor(props) {
-    super(props);
+import api from "../../services/api";
 
-    const { available } = this.props.food;
-    this.state = {
-      isAvailable: available
-    };
-  }
+interface Food {
+  id: number;
+  name: string;
+  description: string;
+  price: string;
+  available: boolean;
+  image: string;
+}
 
-  toggleAvailable = async () => {
-    const { food } = this.props;
-    const { isAvailable } = this.state;
+interface FoodProps {
+  food: Food;
+}
 
+export const CardFood = ({ food }: FoodProps) => {
+  const toggleAvailable = async () => {
     await api.put(`/foods/${food.id}`, {
       ...food,
-      available: !isAvailable,
+      available: !food.available,
     });
-
-    this.setState({ isAvailable: !isAvailable });
-  }
-
-  setEditingFood = () => {
-    const { food, handleEditFood } = this.props;
-
-    handleEditFood(food);
-  }
-
-  const { isAvailable } = this.state;
-  const { food, handleDelete } = this.props;
+  };
 
   return (
-    <Container available={isAvailable}>
+    <Container>
       <header>
         <img src={food.image} alt={food.name} />
       </header>
@@ -52,7 +42,7 @@ export const Food = () => {
           <button
             type="button"
             className="icon"
-            onClick={this.setEditingFood}
+            // onClick={this.setEditingFood}
             data-testid={`edit-food-${food.id}`}
           >
             <FiEdit3 size={20} />
@@ -60,20 +50,20 @@ export const Food = () => {
           <button
             type="button"
             className="icon"
-            onClick={() => handleDelete(food.id)}
+            // onClick={() => handleDelete(food.id)}
             data-testid={`remove-food-${food.id}`}
           >
             <FiTrash size={20} />
           </button>
         </div>
         <div className="availability-container">
-          <p>{isAvailable ? 'Disponível' : 'Indisponível'}</p>
+          <p>{food.available ? "Disponível" : "Indisponível"}</p>
           <label htmlFor={`available-switch-${food.id}`} className="switch">
             <input
               id={`available-switch-${food.id}`}
               type="checkbox"
-              checked={isAvailable}
-              onChange={this.toggleAvailable}
+              checked={food.available}
+              onChange={toggleAvailable}
               data-testid={`change-status-food-${food.id}`}
             />
             <span className="slider" />
@@ -82,5 +72,4 @@ export const Food = () => {
       </section>
     </Container>
   );
-}
-
+};

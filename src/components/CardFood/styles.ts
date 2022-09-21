@@ -12,12 +12,7 @@ export const Container = styled.div`
     transition: 0.3s opacity;
     text-align: center;
 
-    ${props =>
-    !props.available &&
-    css`
-        opacity: 0.3;
-      `};
-
+    
     img {
       pointer-events: none;
       user-select: none;
@@ -30,7 +25,7 @@ export const Container = styled.div`
     h2 {
       color: #3d3d4d;
     }
-
+    
     p {
       color: #3d3d4d;
 
@@ -42,18 +37,18 @@ export const Container = styled.div`
       font-size: 24px;
       line-height: 34px;
       color: #39b100;
-
+      
       b {
         font-weight: 600;
       }
     }
   }
-
+  
   section.footer {
     display: flex;
     justify-content: space-between;
     align-items: center;
-
+    
     padding: 20px 30px;
     background: #e4e4eb;
     border-radius: 0px 0px 8px 8px;
@@ -93,7 +88,7 @@ export const Container = styled.div`
         width: 88px;
         height: 32px;
         margin-left: 12px;
-
+        
         & input {
           opacity: 0;
           width: 0;
@@ -111,7 +106,7 @@ export const Container = styled.div`
           -webkit-transition: 0.4s;
           transition: 0.4s;
           border-radius: 16px;
-
+          
           &:before {
             position: absolute;
             content: '';
@@ -129,7 +124,7 @@ export const Container = styled.div`
         input:checked + .slider {
           background-color: #39b100;
         }
-
+        
         input:focus + .slider {
           box-shadow: 0 0 1px #2196f3;
         }
@@ -143,3 +138,9 @@ export const Container = styled.div`
     }
   }
 `;
+
+          // ${props =>
+          // !props.available &&
+          // css`
+          //     opacity: 0.3;
+          //   `};

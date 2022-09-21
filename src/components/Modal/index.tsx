@@ -1,8 +1,13 @@
 import ReactModal from 'react-modal';
 
-export const Modal = () => {
+interface ModalProps{
+  setIsOpen: boolean;
+}
+
+export const Modal = ({ setIsOpen, ...rest }: ModalProps) => {
   return (
     <ReactModal
+      {...rest}
       shouldCloseOnOverlayClick={!false}
       onRequestClose={setIsOpen}
       ariaHideApp={false}
