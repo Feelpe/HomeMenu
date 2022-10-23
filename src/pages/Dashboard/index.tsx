@@ -4,7 +4,7 @@ import api from "../../services/api";
 
 import { Header } from "../../components/Header";
 import { CardFood } from "../../components/CardFood";
-// import { ModalAddFood } from "../../components/ModalAddFood";
+import { ModalAddFood } from "../../components/ModalAddFood";
 // import { ModalEditFood } from "../../components/ModalEditFood";
 
 import { FoodsContainer } from "./styles";
@@ -20,8 +20,12 @@ interface Food {
 
 export const Dashboard = () => {
   const [foods, setFoods] = useState<Food[]>([]);
-  // const [modalAdd, setModalAdd] = useState<Boolean>(false);
+  const [openAddModal, setOpenAddModal] = useState<Boolean>(false);
   // const [modalEdit, setModalEdit] = useState<Boolean>(false);
+
+  const handleOpenAddModal = () => {
+    setOpenAddModal(!openAddModal)
+  }
 
   useEffect(() => {
     const getFoods = async () => {
@@ -35,13 +39,14 @@ export const Dashboard = () => {
 
   return (
     <>
-      <Header />
-      {/* <ModalAddFood
-        isOpen={'modalOpen'}
-        setIsOpen={'this.toggleModal'}
-        handleAddFood={'this.handleAddFood'}
+      <Header 
+        handleOpenAddModal={handleOpenAddModal}
       />
-      <ModalEditFood
+      <ModalAddFood
+        isOpen={openAddModal}
+        handleOpenAddModal={handleOpenAddModal}
+      />
+      {/* <ModalEditFood
         isOpen={'editModalOpen'}
         setIsOpen={'this.toggleEditModal'}
         editingFood={'editingFood'}
