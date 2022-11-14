@@ -1,5 +1,5 @@
-
 import { FiCheckSquare } from 'react-icons/fi';
+import { useFood } from '../../hooks/useFood';
 
 import { Input } from '../Input';
 import { Modal } from '../Modal';
@@ -14,16 +14,11 @@ export const ModalAddFood = ({
   isOpen, 
   handleOpenAddModal,
 }: ModalProps) => {
-  const handleSubmit = () => {
-    const { setIsOpen, handleAddFood } = this.props;
-
-    handleAddFood(data);
-    setIsOpen();
-  };
+  const { handleAddFood } = useFood();
 
   return (
     <Modal isOpen={isOpen} setIsOpen={() => handleOpenAddModal()}>
-      <Form ref={this.formRef} onSubmit={handleSubmit}>
+      <Form onSubmit={handleAddFood}>
         <h1>Novo Prato</h1>
         <Input name="image" placeholder="Cole o link aqui" />
         <Input name="name" placeholder="Ex: Moda Italiana" />
