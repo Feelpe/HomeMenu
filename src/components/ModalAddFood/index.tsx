@@ -6,7 +6,7 @@ import { Modal } from '../Modal';
 import { Form } from './styles';
 
 interface ModalProps{
-  isOpen: Boolean;
+  isOpen: boolean;
   handleOpenAddModal: () => void;
 }
 

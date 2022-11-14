@@ -1,14 +1,16 @@
 import styled from 'styled-components';
 
 export const FoodsContainer = styled.div`
-  width: 100%;
+  width: full;
   max-width: 1280px;
   margin: 0 auto;
-  padding: 40px 0;
-  margin-top: -140px;
+  padding: 3rem 2rem;
+  margin-top: -100px;
+  gap: 32px;
 
-  display: grid;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-  grid-template-columns: repeat(3, 1fr);
-  grid-gap: 32px;
+  flex-wrap: wrap;
 `;

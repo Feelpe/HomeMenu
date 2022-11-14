@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 
 import api from "../../services/api";
 
-import { Header } from "../../components/Header";
 import { CardFood } from "../../components/CardFood";
+import { Header } from "../../components/Header";
 import { ModalAddFood } from "../../components/ModalAddFood";
 // import { ModalEditFood } from "../../components/ModalEditFood";
 
@@ -20,7 +20,7 @@ interface Food {
 
 export const Dashboard = () => {
   const [foods, setFoods] = useState<Food[]>([]);
-  const [openAddModal, setOpenAddModal] = useState<Boolean>(false);
+  const [openAddModal, setOpenAddModal] = useState<boolean>(false);
   // const [modalEdit, setModalEdit] = useState<Boolean>(false);
 
   const handleOpenAddModal = () => {

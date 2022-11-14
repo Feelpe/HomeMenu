@@ -29,8 +29,8 @@ const FoodContext = createContext<FoodContextData>({} as FoodContextData);
 export function FoodProvider({ children }: FoodProviderProps) {
   const [ foods, setFoods ] = useState<Food[]>([]);
 
-  const [ addModal, setAddModal ] = useState<Boolean>(Boolean);
-  const [ editModal, setEditModal ] = useState<Boolean>(Boolean);
+  const [ addModal, setAddModal ] = useState<boolean>(false);
+  const [ editModal, setEditModal ] = useState<boolean>(false);
 
   useEffect(() => {
     api.get('/foods').then(response => setFoods(response.data))
