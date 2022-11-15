@@ -73,7 +73,11 @@ export function FoodProvider({ children }: FoodProviderProps) {
   const handleUpdateFood = async (food: Food) => {
     try {  
       const response = await api.put(`/foods/${food.id}`, {
-        ...food,
+        name: food.name,
+        description: food.description,
+        price: food.price,
+        available: food.available,
+        image: food.image
       })
     
       const { foodsUpdated } = response.data;

@@ -22,7 +22,7 @@ export const ModalEditFood = ({
   return (
     <Modal isOpen={isOpen} setIsOpen={handleOpenEditModal}>
       <Form 
-        onSubmit={() => handleUpdateFood(editingFood)} 
+        onSubmit={handleUpdateFood} 
         initialData={editingFood}
       >
         <h1>Editar Prato</h1>
