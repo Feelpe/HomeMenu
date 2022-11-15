@@ -1,41 +1,27 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
-import api from "../../services/api";
+import { useFood } from "../../hooks/useFood";
 
 import { CardFood } from "../../components/CardFood";
 import { Header } from "../../components/Header";
 import { ModalAddFood } from "../../components/ModalAddFood";
-// import { ModalEditFood } from "../../components/ModalEditFood";
+import { ModalEditFood } from "../../components/ModalEditFood";
 
 import { FoodsContainer } from "./styles";
 
-interface Food {
-  id: number;
-  name: string;
-  description: string;
-  price: string;
-  available: boolean;
-  image: string;
-}
-
 export const Dashboard = () => {
-  const [foods, setFoods] = useState<Food[]>([]);
+  const { foods, handleUpdateFood, handleDeleteFood } = useFood();
+
   const [openAddModal, setOpenAddModal] = useState<boolean>(false);
-  // const [modalEdit, setModalEdit] = useState<Boolean>(false);
+  const [openEditModal, setOpenEditModal] = useState<boolean>(false);
 
   const handleOpenAddModal = () => {
     setOpenAddModal(!openAddModal)
   }
-
-  useEffect(() => {
-    const getFoods = async () => {
-      const response = await api.get('/foods');
-    
-      setFoods(response.data);
-    }
-
-    getFoods();
-  }, [])
+  
+  const handleOpenEditModal = () => {
+    setOpenEditModal(!openEditModal)
+  }
 
   return (
     <>
@@ -46,22 +32,20 @@ export const Dashboard = () => {
         isOpen={openAddModal}
         handleOpenAddModal={handleOpenAddModal}
       />
-      {/* <ModalEditFood
-        isOpen={'editModalOpen'}
-        setIsOpen={'this.toggleEditModal'}
-        editingFood={'editingFood'}
-        handleUpdateFood={'this.handleUpdateFood'}
-      /> */}
+      <ModalEditFood
+        isOpen={openEditModal}
+        handleOpenEditModal={handleOpenEditModal}
+        // editingFood={'editingFood'}
+      />
       <FoodsContainer data-testid="foods-list">
-        {foods &&
-          foods.map((food) => (
-            <CardFood
-              key={food.id}
-              food={food}
-              // handleDelete={'this.handleDeleteFood'}
-              // handleEditFood={'this.handleEditFood'}
-            />
-          ))}
+        {foods && foods.map((food) => (
+          <CardFood
+            key={food.id}
+            food={food}
+            handleDelete={handleDeleteFood}
+            handleEditFood={handleUpdateFood}
+          />
+        ))}
       </FoodsContainer>
     </>
   );

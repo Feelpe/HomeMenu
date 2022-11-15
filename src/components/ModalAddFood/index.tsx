@@ -17,7 +17,7 @@ export const ModalAddFood = ({
   const { handleAddFood } = useFood();
 
   return (
-    <Modal isOpen={isOpen} setIsOpen={() => handleOpenAddModal()}>
+    <Modal isOpen={isOpen} setIsOpen={handleOpenAddModal}>
       <Form onSubmit={handleAddFood}>
         <h1>Novo Prato</h1>
         <Input name="image" placeholder="Cole o link aqui" />

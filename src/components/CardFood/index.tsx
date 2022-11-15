@@ -26,7 +26,7 @@ export const CardFood = ({ food }: FoodProps) => {
   };
 
   return (
-    <Container>
+    <Container available={food.available}>
       <header>
         <img src={food.image} alt={food.name} />
       </header>

@@ -2,7 +2,7 @@ import { createContext, ReactNode, useContext, useEffect, useState } from "react
 
 import api from "../services/api";
 
-interface Food {
+export interface Food {
   id: number;
   name: string;
   description: string;
@@ -28,9 +28,6 @@ const FoodContext = createContext<FoodContextData>({} as FoodContextData);
 
 export function FoodProvider({ children }: FoodProviderProps) {
   const [ foods, setFoods ] = useState<Food[]>([]);
-
-  const [ addModal, setAddModal ] = useState<boolean>(false);
-  const [ editModal, setEditModal ] = useState<boolean>(false);
 
   useEffect(() => {
     api.get('/foods').then(response => setFoods(response.data))

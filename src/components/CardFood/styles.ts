@@ -1,8 +1,13 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
-export const Container = styled.div`
-  background: #f0f0f5;
-  border-radius: 8px;
+interface ContainerProps {
+  available: boolean;
+}
+
+export const Container = styled.div<ContainerProps>`
+  background: transparent;
+  opacity: ${props => !props.available && 0.6};
+
 
   header {
     background: #ffb84d;
@@ -138,9 +143,3 @@ export const Container = styled.div`
     }
   }
 `;
-
-          // ${props =>
-          // !props.available &&
-          // css`
-          //     opacity: 0.3;
-          //   `};
