@@ -2,7 +2,7 @@ import { FiEdit3, FiTrash } from "react-icons/fi";
 
 import { Container } from "./styles";
 
-import api from "../../services/api";
+import { useFood } from "../../hooks/useFood";
 
 interface Food {
   id: number;
@@ -14,16 +14,12 @@ interface Food {
 }
 
 interface FoodProps {
-  food: Food;
+  food: Food; 
+  handleOpenEditModal: () => void;
 }
 
-export const CardFood = ({ food }: FoodProps) => {
-  const toggleAvailable = async () => {
-    await api.put(`/foods/${food.id}`, {
-      ...food,
-      available: !food.available,
-    });
-  };
+export const CardFood = ({ food, handleOpenEditModal }: FoodProps) => {
+  const { handleDeleteFood, toggleAvailable } = useFood();
 
   return (
     <Container available={food.available}>
@@ -42,7 +38,7 @@ export const CardFood = ({ food }: FoodProps) => {
           <button
             type="button"
             className="icon"
-            // onClick={this.setEditingFood}
+            onClick={handleOpenEditModal}
             data-testid={`edit-food-${food.id}`}
           >
             <FiEdit3 size={20} />
@@ -50,7 +46,7 @@ export const CardFood = ({ food }: FoodProps) => {
           <button
             type="button"
             className="icon"
-            // onClick={() => handleDelete(food.id)}
+            onClick={() => handleDeleteFood(food.id)}
             data-testid={`remove-food-${food.id}`}
           >
             <FiTrash size={20} />
@@ -63,7 +59,7 @@ export const CardFood = ({ food }: FoodProps) => {
               id={`available-switch-${food.id}`}
               type="checkbox"
               checked={food.available}
-              onChange={toggleAvailable}
+              onChange={() => toggleAvailable(food)}
               data-testid={`change-status-food-${food.id}`}
             />
             <span className="slider" />
